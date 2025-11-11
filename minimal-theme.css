@@ -1,0 +1,287 @@
+/**
+ * GitHub Pages Minimal Theme CSS
+ * Adapted for CASP SR Response Viewer
+ * Based on: https://github.com/pages-themes/minimal
+ */
+
+/* Import Noto Sans font */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap');
+
+/* Color Variables */
+:root {
+  /* Minimal theme colors */
+  --minimal-text: #727272;
+  --minimal-heading: #222;
+  --minimal-h2: #393939;
+  --minimal-h3: #494949;
+  --minimal-strong: #222;
+  --minimal-link: #267CB9;
+  --minimal-link-hover: #069;
+  --minimal-bg: #fff;
+  --minimal-code-bg: #f8f8f8;
+  --minimal-border: #e5e5e5;
+  --minimal-border-dark: #e0e0e0;
+}
+
+/* Base Typography */
+body {
+  font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--minimal-text);
+  background-color: var(--minimal-bg);
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 20px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 28px;
+  color: var(--minimal-heading);
+}
+
+h2 {
+  color: var(--minimal-h2);
+}
+
+h3, h4, h5, h6 {
+  color: var(--minimal-h3);
+}
+
+/* Paragraph and Text Elements */
+p, ul, ol, table, pre, dl {
+  margin: 0 0 20px;
+}
+
+strong {
+  color: var(--minimal-strong);
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+/* Links */
+a {
+  color: var(--minimal-link);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: var(--minimal-link-hover);
+  font-weight: bold;
+}
+
+a small {
+  font-size: 11px;
+  color: var(--minimal-text);
+  margin-top: -0.3em;
+  display: block;
+}
+
+a:hover small {
+  color: var(--minimal-text);
+}
+
+/* Code and Pre */
+code, pre {
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+  color: #333;
+}
+
+pre {
+  padding: 8px 15px;
+  background: var(--minimal-code-bg);
+  border-radius: 5px;
+  border: 1px solid var(--minimal-border);
+  overflow-x: auto;
+}
+
+code {
+  padding: 3px 5px;
+  background: var(--minimal-code-bg);
+  border: 1px solid var(--minimal-border);
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 3px solid var(--minimal-border);
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-style: italic;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--minimal-border);
+}
+
+dt {
+  color: #444;
+  font-weight: 700;
+}
+
+th {
+  color: #444;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Keyboard */
+kbd {
+  background-color: #fafafa;
+  border: 1px solid #c6c6c6;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 0 0 2px #fff inset;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0.1em 0.6em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 20px;
+}
+
+/* Horizontal Rule */
+hr {
+  border: 0;
+  background: var(--minimal-border);
+  height: 1px;
+  margin: 0 0 20px;
+}
+
+/* Layout Structure */
+.minimal-wrapper {
+  width: 860px;
+  margin: 0 auto;
+  position: relative;
+  padding: 50px 0;
+}
+
+/* Header Styles (for sidebar layout option) */
+.minimal-header {
+  width: 270px;
+  float: left;
+  position: fixed;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.minimal-header h1 {
+  margin-bottom: 10px;
+}
+
+.minimal-header p {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+/* Section (main content area for sidebar layout) */
+.minimal-section {
+  width: 500px;
+  float: right;
+  padding-bottom: 50px;
+}
+
+/* Footer (for sidebar layout) */
+.minimal-footer {
+  width: 270px;
+  float: left;
+  position: fixed;
+  bottom: 50px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-size: 11px;
+}
+
+/* Small text */
+small {
+  font-size: 11px;
+  color: var(--minimal-text);
+}
+
+/* Responsive Design */
+@media print, screen and (max-width: 960px) {
+  .minimal-wrapper {
+    width: auto;
+    margin: 0;
+  }
+
+  .minimal-header, .minimal-section, .minimal-footer {
+    float: none;
+    position: static;
+    width: auto;
+  }
+
+  .minimal-header {
+    padding-right: 320px;
+  }
+
+  .minimal-section {
+    border: 1px solid var(--minimal-border);
+    border-width: 1px 0;
+    padding: 20px 0;
+    margin: 0 0 20px;
+  }
+
+  .minimal-header a small {
+    display: inline;
+  }
+}
+
+@media print, screen and (max-width: 720px) {
+  body {
+    word-wrap: break-word;
+  }
+
+  .minimal-header {
+    padding: 0;
+  }
+
+  .minimal-header h1, .minimal-header p {
+    margin: 0 0 10px;
+  }
+
+  pre, code {
+    word-wrap: normal;
+  }
+}
+
+@media print, screen and (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .minimal-wrapper {
+    padding: 15px 0;
+  }
+}
+
+@media print {
+  body {
+    padding: 0.4in;
+    font-size: 12pt;
+    color: #444;
+  }
+}
