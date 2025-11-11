@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASP SR Response Viewer</title>
+    <meta name="description" content="View and compare student responses to CASP Systematic Reviews Critical Appraisal questions">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js for statistics visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>CASP Systematic Reviews Response Viewer</h1>
+            <p class="subtitle">Compare and discuss student critical appraisals</p>
+        </header>
+
+        <!-- Controls Section -->
+        <div class="controls">
+            <!-- Question Navigation -->
+            <div class="question-navigation">
+                <button id="prevQuestion" class="btn btn-nav" disabled>
+                    ← Previous
+                </button>
+                <select id="questionSelector" class="question-selector">
+                    <!-- Options populated dynamically -->
+                </select>
+                <button id="nextQuestion" class="btn btn-nav">
+                    Next →
+                </button>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <label class="filter-label">
+                    Filter by Answer:
+                    <select id="filterAnswer" class="filter-select">
+                        <option value="all">All Responses</option>
+                        <option value="Yes">Yes Only</option>
+                        <option value="No">No Only</option>
+                        <option value="Can't Tell">Can't Tell Only</option>
+                    </select>
+                </label>
+                <button id="showStatistics" class="btn btn-stats">
+                    📊 Show Statistics
+                </button>
+            </div>
+
+            <!-- Info Bar -->
+            <div class="info-bar">
+                <span id="responseCount" class="info-item">Loading...</span>
+                <span id="refreshStatus" class="info-item">Auto-refresh: ON</span>
+                <button id="toggleRefresh" class="btn btn-small">Toggle Refresh</button>
+            </div>
+        </div>
+
+        <!-- Current Question Display -->
+        <div id="currentQuestion" class="current-question">
+            <h2 id="questionText" class="question-text">Loading question...</h2>
+            <div id="considerPrompt" class="consider-prompt collapsible">
+                <button class="consider-toggle">▼ Show CONSIDER Prompts</button>
+                <div class="consider-content" style="display: none;">
+                    <!-- CONSIDER content populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading responses...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error" class="error" style="display: none;">
+            <p id="errorMessage"></p>
+            <button id="retryButton" class="btn">Retry</button>
+        </div>
+
+        <!-- Response Cards Container -->
+        <div id="responsesContainer" class="responses-container">
+            <!-- Response cards populated dynamically -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>No responses match your filter criteria.</p>
+        </div>
+
+        <!-- Statistics Modal -->
+        <div id="statisticsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <h2>Response Statistics</h2>
+
+                <!-- Completion Rate -->
+                <div class="stat-section">
+                    <h3>Completion Rate</h3>
+                    <p id="completionRate" class="stat-text"></p>
+                </div>
+
+                <!-- Answer Distribution -->
+                <div class="stat-section">
+                    <h3>Answer Distribution</h3>
+                    <canvas id="answerChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Top Voted Responses -->
+                <div class="stat-section" id="topVotedSection" style="display: none;">
+                    <h3>Top Voted Responses</h3>
+                    <canvas id="voteChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Can't Tell Frequency -->
+                <div class="stat-section">
+                    <h3>Questions with Most Uncertainty</h3>
+                    <canvas id="uncertaintyChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>CASP Systematic Reviews Critical Appraisal Tool |
+               <span id="lastUpdate">Last updated: Never</span> |
+               <a href="https://casp-uk.net/" target="_blank">CASP Official Site</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Configuration -->
+    <script src="config.js"></script>
+    <!-- Main Application -->
+    <script src="app.js"></script>
+</body>
+</html>
