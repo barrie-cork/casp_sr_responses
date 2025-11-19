@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # API URL from config.js
-API_URL="https://script.google.com/macros/s/AKfycbxQyAI89eyOkoxdvFlUU3OgvysWkBQxFqrrT7SV9U6czT6eYPn_TA0sOAwdPGsBdEtSlQ/exec"
+API_URL="https://script.google.com/macros/s/AKfycbz5j5wZItErZ30nfmBBusf2SjtphIOL1xoLB2puY6Awbvu8WG02f7Ktvnr-SDcb8A_Sig/exec"
 
 echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
 echo -e "${BLUE}  CASP SR Response Viewer - Deployment Verification${NC}"

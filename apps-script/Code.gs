@@ -166,10 +166,15 @@ function doGet(e) {
  */
 function getResponses() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(SHEET_NAMES.RESPONSES);
+  let sheet = ss.getSheetByName(SHEET_NAMES.RESPONSES);
+
+  // Try alternate capitalization if not found
+  if (!sheet) {
+    sheet = ss.getSheetByName('Form responses 1'); // lowercase 'r'
+  }
 
   if (!sheet) {
-    throw new Error(`Sheet "${SHEET_NAMES.RESPONSES}" not found`);
+    throw new Error(`Sheet "${SHEET_NAMES.RESPONSES}" not found. Available sheets: ${ss.getSheets().map(s => s.getName()).join(', ')}`);
   }
 
   const data = sheet.getDataRange().getValues();
