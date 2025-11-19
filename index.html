@@ -50,7 +50,7 @@
                     </select>
                 </label>
                 <button id="showStatistics" class="btn btn-stats">
-                    📊 Show Statistics
+                    📊 Show statistics
                 </button>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="info-bar">
                 <span id="responseCount" class="info-item">Loading...</span>
                 <span id="refreshStatus" class="info-item">Auto-refresh: ON</span>
-                <button id="toggleRefresh" class="btn btn-small">Toggle Refresh</button>
+                <button id="toggleRefresh" class="btn btn-small">Toggle refresh</button>
             </div>
         </div>
 
@@ -66,7 +66,7 @@
         <div id="currentQuestion" class="current-question">
             <h2 id="questionText" class="question-text">Loading question...</h2>
             <div id="considerPrompt" class="consider-prompt collapsible">
-                <button class="consider-toggle">▼ Show CONSIDER Prompts</button>
+                <button class="consider-toggle">▼ Show CONSIDER prompts</button>
                 <div class="consider-content" style="display: none;">
                     <!-- CONSIDER content populated dynamically -->
                 </div>
@@ -99,29 +99,29 @@
         <div id="statisticsModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="modal-close">&times;</span>
-                <h2>Response Statistics</h2>
+                <h2>Response statistics</h2>
 
                 <!-- Completion Rate -->
                 <div class="stat-section">
-                    <h3>Completion Rate</h3>
+                    <h3>Completion rate</h3>
                     <p id="completionRate" class="stat-text"></p>
                 </div>
 
                 <!-- Answer Distribution -->
                 <div class="stat-section">
-                    <h3>Answer Distribution</h3>
+                    <h3>Answer distribution</h3>
                     <canvas id="answerChart" width="400" height="200"></canvas>
                 </div>
 
                 <!-- Top Voted Responses -->
                 <div class="stat-section" id="topVotedSection" style="display: none;">
-                    <h3>Top Voted Responses</h3>
+                    <h3>Top voted responses</h3>
                     <canvas id="voteChart" width="400" height="200"></canvas>
                 </div>
 
                 <!-- Can't Tell Frequency -->
                 <div class="stat-section">
-                    <h3>Questions with Most Uncertainty</h3>
+                    <h3>Questions with most uncertainty</h3>
                     <canvas id="uncertaintyChart" width="400" height="300"></canvas>
                 </div>
             </div>

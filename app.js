@@ -67,7 +67,7 @@ class CASPResponseViewer {
                 const content = e.target.nextElementSibling;
                 const isShowing = content.style.display === 'block';
                 content.style.display = isShowing ? 'none' : 'block';
-                e.target.textContent = isShowing ? '▼ Show CONSIDER Prompts' : '▲ Hide CONSIDER Prompts';
+                e.target.textContent = isShowing ? '▼ Show CONSIDER prompts' : '▲ Hide CONSIDER prompts';
             }
         });
     }
@@ -121,12 +121,30 @@ class CASPResponseViewer {
             const response = await fetch(`${CONFIG.API_URL}?action=getVotes`);
             if (response.ok) {
                 const votesData = await response.json();
-                // Process votes into a structured format
+
+                // The API returns votes in format: {"q0_s0": 2, "q1_s3": 1, ...}
+                // We need to convert to: {"0_0": 2, "1_3": 1, ...}
                 this.votes = {};
-                votesData.votes.forEach(vote => {
-                    const key = `${vote.questionIndex}_${vote.studentRowIndex}`;
-                    this.votes[key] = (this.votes[key] || 0) + 1;
-                });
+
+                if (votesData && typeof votesData === 'object') {
+                    // Check if it's the direct format from getVotes
+                    Object.entries(votesData).forEach(([key, count]) => {
+                        // Parse the key format "q0_s0" to "0_0"
+                        const match = key.match(/q(\d+)_s(\d+)/);
+                        if (match) {
+                            const newKey = `${match[1]}_${match[2]}`;
+                            this.votes[newKey] = count;
+                        }
+                    });
+
+                    console.log('Loaded votes:', this.votes);
+                } else if (votesData.votes) {
+                    // Alternative format with votes array
+                    votesData.votes.forEach(vote => {
+                        const key = `${vote.questionIndex}_${vote.studentRowIndex}`;
+                        this.votes[key] = (this.votes[key] || 0) + 1;
+                    });
+                }
             }
         } catch (error) {
             console.error('Error loading votes:', error);

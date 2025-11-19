@@ -147,6 +147,10 @@ function doGet(e) {
         return ContentService.createTextOutput(JSON.stringify(getVotes()))
           .setMimeType(ContentService.MimeType.JSON);
 
+      case 'debug':
+        return ContentService.createTextOutput(JSON.stringify(getDebugInfo()))
+          .setMimeType(ContentService.MimeType.JSON);
+
       default:
         throw new Error('Invalid action');
     }
@@ -293,6 +297,49 @@ function recordVote(questionIndex, studentRowIndex) {
   votesSheet.appendRow([new Date(), questionIndex, studentRowIndex]);
 
   return { success: true, message: 'Vote recorded' };
+}
+
+/**
+ * Get debug information about the spreadsheet
+ * Call via: ?action=debug
+ */
+function getDebugInfo() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAMES.RESPONSES);
+
+  const debugInfo = {
+    spreadsheetName: ss.getName(),
+    spreadsheetId: ss.getId(),
+    sheetExists: !!sheet,
+    availableSheets: ss.getSheets().map(s => s.getName()),
+    targetSheetName: SHEET_NAMES.RESPONSES
+  };
+
+  if (sheet) {
+    const data = sheet.getDataRange().getValues();
+    debugInfo.rowCount = data.length;
+    debugInfo.columnCount = data.length > 0 ? data[0].length : 0;
+    debugInfo.hasData = data.length >= 2;
+
+    // Show first row (headers) for column verification
+    if (data.length > 0) {
+      debugInfo.headers = data[0];
+    }
+
+    // Show sample of first data row (if exists)
+    if (data.length > 1) {
+      debugInfo.sampleRow = {
+        timestamp: data[1][0],
+        name: data[1][1] ? '[REDACTED]' : '(empty)',
+        paperTitle: data[1][2] ? data[1][2].substring(0, 50) : '(empty)',
+        hasDataInColumn6: !!data[1][6],
+        hasDataInColumn8: !!data[1][8],
+        totalColumnsWithData: data[1].filter(cell => cell !== '').length
+      };
+    }
+  }
+
+  return debugInfo;
 }
 
 /**
